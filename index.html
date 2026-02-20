@@ -1,462 +1,412 @@
 <!DOCTYPE html>
-<html lang="en" class="js">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>NorthMark Solutions</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Shrihari Kasar | AI Engineer</title>
 
-  <!-- Inter Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<style>
 
-  <link rel="stylesheet" href="index.css" />
+/* =============================
+   GLOBAL DESIGN SYSTEM
+============================= */
+
+:root{
+  --bg:#0B0F19;
+  --bg2:#0F172A;
+  --card:rgba(255,255,255,0.05);
+  --border:rgba(255,255,255,0.1);
+  --text:#F8FAFC;
+  --accent:#3B82F6;
+  --purple:#8B5CF6;
+  --cyan:#06B6D4;
+}
+
+body.light{
+  --bg:#FFFFFF;
+  --bg2:#F1F5F9;
+  --card:rgba(0,0,0,0.05);
+  --border:rgba(0,0,0,0.1);
+  --text:#0F172A;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:Inter, sans-serif;
+  background:linear-gradient(145deg,var(--bg),var(--bg2));
+  color:var(--text);
+  overflow-x:hidden;
+  scroll-behavior:smooth;
+  transition:0.4s ease;
+}
+
+/* =============================
+   NAVIGATION
+============================= */
+
+nav{
+  position:fixed;
+  top:0;
+  width:100%;
+  backdrop-filter:blur(20px);
+  background:rgba(0,0,0,0.4);
+  border-bottom:1px solid var(--border);
+  padding:18px 60px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  z-index:1000;
+}
+
+nav a{
+  color:var(--text);
+  text-decoration:none;
+  margin-left:30px;
+  font-weight:500;
+  position:relative;
+}
+
+nav a::after{
+  content:"";
+  position:absolute;
+  bottom:-5px;
+  left:0;
+  width:0;
+  height:2px;
+  background:var(--accent);
+  transition:0.3s;
+}
+
+nav a:hover::after{
+  width:100%;
+}
+
+.toggle{
+  cursor:pointer;
+  padding:6px 12px;
+  border-radius:20px;
+  border:1px solid var(--border);
+}
+
+/* =============================
+   HERO SECTION
+============================= */
+
+.hero{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:0 20px;
+  position:relative;
+}
+
+.hero h1{
+  font-family:Sora;
+  font-size:4rem;
+  font-weight:800;
+  background:linear-gradient(90deg,var(--accent),var(--purple));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.hero p{
+  margin-top:20px;
+  max-width:800px;
+  font-size:1.2rem;
+  opacity:0.85;
+}
+
+.btn{
+  margin-top:30px;
+  padding:14px 30px;
+  border-radius:30px;
+  border:none;
+  cursor:pointer;
+  font-weight:600;
+  background:linear-gradient(90deg,var(--accent),var(--purple));
+  color:white;
+  transition:0.3s;
+}
+
+.btn:hover{
+  transform:translateY(-3px);
+  box-shadow:0 0 20px var(--purple);
+}
+
+/* Floating Particles */
+
+canvas{
+  position:absolute;
+  top:0;
+  left:0;
+  z-index:-1;
+}
+
+/* =============================
+   SECTIONS
+============================= */
+
+section{
+  padding:120px 10%;
+}
+
+.section-title{
+  font-family:Sora;
+  font-size:2.8rem;
+  margin-bottom:40px;
+  text-align:center;
+}
+
+/* =============================
+   GLASS CARD
+============================= */
+
+.card{
+  background:var(--card);
+  backdrop-filter:blur(20px);
+  border:1px solid var(--border);
+  padding:40px;
+  border-radius:20px;
+  transition:0.4s;
+}
+
+.card:hover{
+  transform:translateY(-10px) rotateX(5deg);
+  box-shadow:0 0 30px rgba(59,130,246,0.3);
+}
+
+/* =============================
+   GRID
+============================= */
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:40px;
+}
+
+/* =============================
+   COUNTER
+============================= */
+
+.counter{
+  font-size:2.5rem;
+  font-weight:700;
+  color:var(--accent);
+}
+
+/* =============================
+   TESTIMONIAL
+============================= */
+
+.testimonial{
+  display:none;
+  text-align:center;
+}
+
+.testimonial.active{
+  display:block;
+  animation:fade 1s ease;
+}
+
+@keyframes fade{
+  from{opacity:0}
+  to{opacity:1}
+}
+
+/* =============================
+   FOOTER
+============================= */
+
+footer{
+  padding:60px 10%;
+  background:linear-gradient(145deg,#05070D,#0F172A);
+  text-align:center;
+  border-top:1px solid var(--border);
+}
+
+/* Scroll Progress */
+
+.progress{
+  position:fixed;
+  top:0;
+  left:0;
+  height:4px;
+  background:linear-gradient(90deg,var(--accent),var(--purple));
+  width:0%;
+  z-index:2000;
+}
+
+</style>
 </head>
+
 <body>
-<div class="nav-wrap">
-  <div class="navbar">
 
-    <div class="nav-logo">
-      <img src="logo.png" alt="NorthMark Logo" />
-    </div>
+<div class="progress" id="progress"></div>
 
-    <button class="nav-toggle" aria-label="Toggle menu">
-      <i class="fas fa-bars"></i>
-    </button>
-
-    <div class="nav-links">
-      <a href="index.html" class="nav-link">Home</a>
-      <a href="services.html" class="nav-link">Services</a>
-      <a href="industry.html" class="nav-link">Industries</a>
-      <a href="about.html" class="nav-link">About us</a>
-      <a href="contact.html" class="nav-link nav-contact">Contact</a>
-    </div>
-
+<nav>
+  <div><strong>Shrihari Kasar</strong></div>
+  <div>
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#portfolio">Portfolio</a>
+    <a href="#contact">Contact</a>
+    <span class="toggle" onclick="toggleMode()">Toggle</span>
   </div>
-</div>
+</nav>
 
-<!-- HERO -->
-<!-- <section class="hero">
-  <h1>Strategy First,</h1>
-  <h2>Execution with Intent.</h2>
-  <h2>For Systems That Scale.</h2>
-
-  <p>
-    Strategy without execution is noise. Execution without strategy is waste.
-  </p>
-
-  <div class="cta">
-    <a href="#" class="btn-primary">Get Started →</a>
-    <a href="#" class="btn-secondary">Learn More</a>
-  </div>
-</section> -->
 <section class="hero">
-  <div class="hero-content">
-
-    <div class="hero-grid hero-center">
-
-      <!-- CENTERED TEXT (ANIMATE FROM LEFT) -->
-      <div class="hero-text hero-animate-left">
-        <h1>Strategy First,</h1>
-        <h2>Execution with Intent.</h2>
-        <h2>For Systems That Scale.</h2>
-
-        <p>
-          Strategy without execution is noise. Execution without strategy is waste.
-        </p>
-
-        <div class="cta">
-          <a href="#" class="btn-primary">Get Started</a>
-          <a href="#" class="btn-secondary">Learn More</a>
-        </div>
-      </div>
-
-    </div>
-
-  </div>
+  <canvas id="particles"></canvas>
+  <h1>Hello, I'm Shrihari Kasar</h1>
+  <p>Founder at Shyntrix Infotech & AI Engineer. Building Intelligent, Scalable AI-Powered Digital Solutions for Businesses, Startups & Innovators.</p>
+  <button class="btn">View My Work</button>
 </section>
-<!-- WHO WE ARE -->
-<section class="who-we-are">
-  <div class="who-container">
 
-    <h3 class="reveal">Who We Are</h3>
-
-    <p class="who-lead reveal">
-      A team of professionals with over a decade of experience across business functions.
-    </p>
-
-    <p class="reveal">
-      Track record of business intelligence to scale business with data-backed strategies across
-      Sales, Marketing, Technology & Operations.
-    </p>
-
-    <p class="who-strong reveal">
-      We help businesses build systems that scale.
-    </p>
-
-    <!-- STATS -->
-    <div class="stats-grid">
-      <div class="stat-card reveal">
-        <div class="stat-number" data-target="10">0</div>
-        <div class="stat-label">+ Years Experience</div>
-      </div>
-
-      <div class="stat-card reveal">
-        <div class="stat-number" data-target="150">0</div>
-        <div class="stat-label">+ Projects Delivered</div>
-      </div>
-
-      <div class="stat-card reveal">
-        <div class="stat-number" data-target="98">0</div>
-        <div class="stat-label">% Client Satisfaction</div>
-      </div>
+<section id="about">
+  <h2 class="section-title">About Me</h2>
+  <div class="grid">
+    <div class="card">
+      <p>I build intelligent AI systems, automation platforms, and production-ready web applications designed to solve real-world business problems.</p>
     </div>
-
-    <!-- FEATURE GRID -->
-    <div class="feature-grid">
-      <div class="feature-card reveal">
-       <h4>Technology</h4>
-        <p>Scalable systems, automation, and modern architecture for growth-ready platforms.</p>
-      </div>
-
-      <div class="feature-card reveal">
-        <h4>Sales</h4>
-        <p>Customer acquisition and retention strategies to drive growth.</p>
-      </div>
-
-      <div class="feature-card reveal">
-        <h4>Marketing</h4>
-        <p>Performance-driven campaigns with analytics-led customer acquisition strategies.</p>
-      </div>
-
-      <div class="feature-card reveal">
-        <h4>Operations</h4>
-        <p>Process optimization and systems to drive efficiency at scale.</p>
-      </div>
+    <div class="card">
+      <div class="counter" data-target="50">0</div>
+      <p>Projects Completed</p>
     </div>
-
   </div>
 </section>
 
-
-<!-- PROBLEM -->
-<section class="problem-section">
-  <div class="problem-container">
-
-    <!-- LEFT CONTENT -->
-    <div class="problem-content reveal from-left">
-      <h1>The Problem</h1>
-      <h2>Growth breaks when systems don’t talk</h2>
-
-      <p class="problem-lead">
-        Businesses invest heavily in marketing, tools, and technology —
-        yet growth stalls. The issue isn’t effort.  
-        It’s fragmentation.
-      </p>
-
-      <p class="problem-text">
-        When marketing, technology, and operations operate in silos,
-        teams lose visibility, waste budgets, and make reactive decisions.
-        Growth needs connected systems — not disconnected actions.
-      </p>
+<section id="services">
+  <h2 class="section-title">Services</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Project Mentorship</h3>
+      <p>Guidance for AI & Web projects from concept to deployment.</p>
     </div>
-
-    <!-- RIGHT GRID -->
-    <div class="why-grid">
-
-      <div class="why-card reveal">
-        <h4>Isolated Marketing</h4>
-        <p>
-          Campaigns run without alignment to business goals or system data,
-          resulting in low ROI and inconsistent growth.
-        </p>
-      </div>
-
-      <div class="why-card reveal">
-        <h4>Lack of Data Visibility</h4>
-        <p>
-          Decision-makers don’t have real-time insights into performance,
-          customer behavior, or operational efficiency.
-        </p>
-      </div>
-
-      <div class="why-card reveal">
-        <h4>Tool Overload</h4>
-        <p>
-          Multiple tools solving the same problem create confusion,
-          duplication, and increased costs.
-        </p>
-      </div>
-
-      <div class="why-card reveal">
-        <h4>Reactive Technology</h4>
-        <p>
-          Technology decisions are made in response to problems,
-          not as part of a long-term growth strategy.
-        </p>
-      </div>
-
-      <div class="why-card reveal">
-        <h4>Poor Adoption</h4>
-        <p>
-          Teams struggle to adopt new systems due to lack of clarity,
-          training, and ownership.
-        </p>
-      </div>
-
-      <div class="why-card reveal">
-        <h4>Disconnected Execution</h4>
-        <p>
-          Teams execute tasks without understanding the “why”,
-          leading to inefficiency and missed opportunities.
-        </p>
-      </div>
-
-    </div>
-
-  </div>
-</section>
-
-<!-- why this happen  -->
-<section class="why-section">
-  <div class="why-container">
-
-    <div class="why-header">
-      <h2>Why This Happens?</h2>
-      <p class="why-quote">
-        Strategy without execution is noise.<br />
-        Execution without strategy is waste.
-      </p>
-    </div>
-
-    <div class="why-content">
-      
-      <div class="why-left">
-        <h3>The Real Problem</h3>
-        <p>
-          Most digital initiatives fail not because of lack of effort,
-          but because of misaligned intent. Execution happens in silos,
-          disconnected from business outcomes.
-        </p>
-      </div>
-
-      <div class="why-right">
-        <h3>Because Most Digital Partners</h3>
-
-        <ul class="why-list">
-          <li>Execute tasks, not outcomes</li>
-          <li>Start with tools, not strategy</li>
-          <li>Optimize channels, not the business</li>
-          <li>Disappear after delivery</li>
-        </ul>
-      </div>
-
+    <div class="card">
+      <h3>Paid Development</h3>
+      <p>High-quality AI & Web solutions tailored for startups and enterprises.</p>
     </div>
   </div>
 </section>
-<!-- APPROACH -->
-<section class="approach-section" id="approach">
 
-  <h2 class="approach-title">Our Approach</h2>
-  <p class="approach-subtitle">
-    Strategy first. Execution with intent. Systems built to scale.
-  </p>
-
-  <div class="diagram-wrap">
-
-<!-- SVG ARCS + CONNECTORS (V-SHAPE — MORE SPACE) -->
-<svg class="reveal delay-1" viewBox="0 0 900 700">
-
-  <!-- LEFT ARM -->
-  <path class="connector" d="M450,560 L100,40" />    <!-- 1 -->
-  <path class="connector" d="M450,560 L200,180" />   <!-- 2 -->
-  <path class="connector" d="M450,560 L320,360" />   <!-- 3 -->
-
-  <!-- RIGHT ARM -->
-  <path class="connector" d="M450,560 L800,40" />    <!-- 6 -->
-  <path class="connector" d="M450,560 L700,180" />   <!-- 5 -->
-  <path class="connector" d="M450,560 L580,360" />   <!-- 4 -->
-
-  <!-- Wide funnel guide arcs -->
-  <path class="arc" d="M80,60 Q450,460 820,60" />
-  <path class="arc" d="M180,200 Q450,520 720,200" />
-
-</svg>
-    <!-- STEP 1 -->
-    <!-- STEP 1 -->
-<div class="node n1 reveal delay-3">
-  <h4>Strategy First</h4>
-  <p>Ownership of outcomes, data-driven decisions, sustainable growth.</p>
-</div>
-
-<!-- STEP 2 -->
-<div class="node n2 reveal delay-4">
-  <h4>Understand Business</h4>
-  <p>Goals, gaps, challenges & constraints clearly identified.</p>
-</div>
-
-<!-- STEP 3 -->
-<div class="node n3 reveal delay-5">
-  <h4>Design System</h4>
-  <p>Strategy, roadmap & scalable architecture.</p>
-</div>
-
-<!-- STEP 4 -->
-<div class="node n4 reveal delay-6">
-  <h4>Execute with Ownership</h4>
-  <p>Marketing, tech & operations aligned.</p>
-</div>
-
-<!-- STEP 5 -->
-<div class="node n5 reveal delay-7">
-  <h4>Test & Implement</h4>
-  <p>Analyse, test, iterate & implement.</p>
-</div>
-
-<!-- STEP 6 -->
-<div class="node n6 reveal delay-8">
-  <h4>Optimize & Scale</h4>
-  <p>Fix leaks, improve efficiency & scale sustainably.</p>
-</div>
-
-
+<section id="portfolio">
+  <h2 class="section-title">AI & Web Projects</h2>
+  <div class="grid">
+    <div class="card">MatoshriGPT – AI Campus Assistant</div>
+    <div class="card">Transaction Fraud Detection System</div>
+    <div class="card">Student Achievement Portal</div>
+    <div class="card">Music Recommendation System</div>
   </div>
 </section>
-<!-- WHY NORTHMARK -->
-<section class="northmark-section">
-  <div class="northmark-container">
 
-    <div class="northmark-header">
-      <h2>Why NorthMark?</h2>
-      <span class="northmark-tag">Outcome Aligned Execution</span>
-    </div>
+<section>
+  <h2 class="section-title">Testimonials</h2>
+  <div class="testimonial active">AI-powered systems expanded my ML expertise.</div>
+  <div class="testimonial">Built scalable Flask applications with secure architecture.</div>
+  <div class="testimonial">Focused on intelligent UX-driven AI products.</div>
+</section>
 
-    <div class="northmark-grid">
-
-      <div class="northmark-card">
-        <h3>Ownership of Outcomes</h3>
-        <p>
-          We take full ownership of results — not just completing tasks,
-          but driving measurable business outcomes.
-        </p>
-      </div>
-
-      <div class="northmark-card">
-        <h3>Complete Digital Transformation</h3>
-        <p>
-          End-to-end transformation across Marketing, Technology,
-          and Operations aligned to business goals.
-        </p>
-      </div>
-
-      <div class="northmark-card">
-        <h3>Data-Backed Intelligence</h3>
-        <p>
-          Decisions powered by real-time data, analytics,
-          and actionable business intelligence.
-        </p>
-      </div>
-
-      <div class="northmark-card">
-        <h3>Transparency & Accountability</h3>
-        <p>
-          Utmost transparency, security, and accountability
-          across systems, data, and execution.
-        </p>
-      </div>
-
-      <div class="northmark-card highlight">
-        <h3>Cost & Efficiency Optimization</h3>
-        <p>
-          Cut costs, improve efficiency, and scale sustainably
-          through transparent, optimized systems.
-        </p>
-      </div>
-
-    </div>
+<section id="contact">
+  <h2 class="section-title">Contact</h2>
+  <div class="card">
+    <p>Email: shreeharikasar@gmail.com</p>
+    <p>Phone: +91 8605662671</p>
   </div>
 </section>
-<section class="who-we-work">
-  <div class="container">
 
-    <!-- ALL TEXT ON TOP -->
-    <div class="who-work-header">
-      <h2>Who We Work With</h2>
+<footer>
+  © 2025 All Rights Reserved. Designed by Shrihari Kasar
+</footer>
 
-      <p class="lead">
-        We partner with ambitious individuals and organizations that believe
-        in innovation, clarity, and sustainable growth.
-      </p>
-
-      <p class="supporting-text">
-        Our approach is tailored for leaders and businesses who want measurable
-        results, strong digital presence, and long-term impact.
-      </p>
-    </div>
-
-    <!-- CARDS GRID BELOW -->
-    <div class="cards two-col-cards">
-
-      <!-- 1 -->
-      <div class="card">
-        <span class="number">01</span>
-        <h3>Founder & Leadership Teams</h3>
-        <p>Visionary leaders shaping strategy and growth.</p>
-      </div>
-
-      <!-- 3 -->
-      <div class="card">
-        <span class="number">03</span>
-        <h3>SMEs, Startups & Scaling Businesses</h3>
-        <p>Growing companies ready to scale efficiently.</p>
-      </div>
-
-      <!-- 2 -->
-      <div class="card">
-        <span class="number">02</span>
-        <h3>B2B & B2C Businesses</h3>
-        <p>Customer-focused businesses driving performance.</p>
-      </div>
-
-      <!-- 4 -->
-      <div class="card">
-        <span class="number">04</span>
-        <h3>Experts & Consultants</h3>
-        <p>Professionals expanding digital influence.</p>
-      </div>
-
-    </div>
-
-  </div>
-</section>
-<!-- FOOTER -->
-<div id="footer-placeholder"></div>
-
-<!-- REVEAL + FOOTER SCRIPT -->
 <script>
-  /* Footer include */
-  fetch('footer.html')
-    .then(res => res.text())
-    .then(html => {
-      const footer = document.getElementById('footer-placeholder');
-      if (footer) footer.innerHTML = html;
-    });
-</script>
-<script src="script.js"></script>
-<script>
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('show');
-      observer.unobserve(entry.target);
+
+/* Dark Light Toggle */
+function toggleMode(){
+  document.body.classList.toggle("light");
+}
+
+/* Counter Animation */
+document.querySelectorAll(".counter").forEach(counter=>{
+  const update=()=>{
+    const target=+counter.getAttribute("data-target");
+    const c=+counter.innerText;
+    const inc=target/100;
+    if(c<target){
+      counter.innerText=Math.ceil(c+inc);
+      setTimeout(update,20);
+    }else{
+      counter.innerText=target;
+    }
+  }
+  update();
+});
+
+/* Scroll Progress */
+window.onscroll=function(){
+  let winScroll=document.body.scrollTop||document.documentElement.scrollTop;
+  let height=document.documentElement.scrollHeight-document.documentElement.clientHeight;
+  document.getElementById("progress").style.width=(winScroll/height)*100+"%";
+};
+
+/* Testimonial Carousel */
+let index=0;
+setInterval(()=>{
+  let testimonials=document.querySelectorAll(".testimonial");
+  testimonials[index].classList.remove("active");
+  index=(index+1)%testimonials.length;
+  testimonials[index].classList.add("active");
+},4000);
+
+/* AI Particles */
+const canvas=document.getElementById("particles");
+const ctx=canvas.getContext("2d");
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let particles=[];
+for(let i=0;i<100;i++){
+  particles.push({
+    x:Math.random()*canvas.width,
+    y:Math.random()*canvas.height,
+    r:Math.random()*2,
+    d:Math.random()*1
+  });
+}
+
+function draw(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle="rgba(59,130,246,0.6)";
+  particles.forEach(p=>{
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fill();
+  });
+  updateParticles();
+}
+
+function updateParticles(){
+  particles.forEach(p=>{
+    p.y+=p.d;
+    if(p.y>canvas.height){
+      p.y=0;
+      p.x=Math.random()*canvas.width;
     }
   });
-}, { threshold: 0.3 });
+}
 
-document.querySelectorAll('.reveal').forEach(el => {
-  observer.observe(el);
-});
+setInterval(draw,33);
+
 </script>
+
 </body>
 </html>
